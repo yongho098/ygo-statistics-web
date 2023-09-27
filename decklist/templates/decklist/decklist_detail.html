@@ -1,0 +1,23 @@
+{% extends 'decklist/base.html' %}
+
+{% block content %}
+    <article class="decklist">
+        <aside class="actions">
+            {% if user.is_authenticated %}
+            <a href="{% url 'decklist_edit' pk=decklist.pk %}" class="button2">Edit Decklist</a>
+            <a href="{% url 'decklist_simulator_run' pk=decklist.pk %}" class="button2">Run Simulator</a>
+            {% endif %}
+        </aside>
+        <h2>{{ decklist.title }}</h2>
+        {% for key, values in clean.items %}
+        <p>{{ values|linebreaksbr }} {{ key }}</p>
+        {% endfor %}
+        <br>
+        <p>Combos</p>
+        <p>
+            {% for combo in decklist.deck_combo %}
+            {{ combo }}<br>
+            {% endfor %}
+        </p>
+    </article>
+{% endblock %}

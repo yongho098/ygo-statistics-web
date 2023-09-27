@@ -1,0 +1,26 @@
+{% extends 'decklist/base.html' %}
+
+
+{% block content %}
+    <table style="width:100%">
+    <tr>
+        <th>Runs</th>
+        {% for key, values in analysis.items %}
+        <th>{{ key }}</th>
+        {% endfor %}
+    </tr>
+    <tr>
+        <td>{{ runs }}</td>
+        {% for key, values in analysis.items %}
+        <td>{{ values }}</td>
+        {% endfor %}
+    </tr>
+    </table>
+    <br>
+    <p>Hand Results</p>
+    <p>
+    {% for result in output %}
+     {{ result }}<br>
+    {% endfor %}
+    </p>
+{% endblock %}

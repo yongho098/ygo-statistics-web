@@ -1,0 +1,9 @@
+{% extends 'decklist/base.html' %}
+
+{% block content %}
+{% for decklist in decklists %}
+    <article class="decklist">
+        <h2><a href="{% url 'decklist_detail' pk=decklist.pk %}">{{ decklist.title }}</a></h2>        
+    </article>
+    {% endfor %}
+{% endblock %}
