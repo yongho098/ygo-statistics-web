@@ -8,12 +8,26 @@
             <a href="{% url 'decklist_simulator_run' pk=decklist.pk %}" class="button2">Run Simulator</a>
             {% endif %}
         </aside>
-        <h2>{{ decklist.title }}</h2>
-        {% for key, values in clean.items %}
-        <p>{{ values|linebreaksbr }} {{ key }}</p>
-        {% endfor %}
-        <br>
-        <p>Combos</p>
+        <h1 class="titles">{{ decklist.title }}</h1>
+
+        <table class="table">
+            <tr>
+                <td>Card Name</td>
+                <td>Copies</td>
+                <td>Engine/Non-Engine</td>
+                <td>Categorization</td>
+            </tr>
+            {% for row in clean_dict %}
+            <tr>
+                <td>{{ row.Name }}</td>
+                <td>{{ row.Copies }}</td>
+                <td>{{ row.Engine }}</td>
+                <td>{{ row.Categorization }}</td>
+            </tr>
+            {% endfor %}
+          </table>  
+
+        <h1>Combos</h1>
         <p>
             {% for combo in decklist.deck_combo %}
             {{ combo }}<br>
@@ -21,3 +35,4 @@
         </p>
     </article>
 {% endblock %}
+

@@ -3,9 +3,9 @@ h1 a, h2 a {
     font-family: 'Arial';
 }
 .page-header {
-    background-color: #298eb6;
+    background-color: #7e6ed8;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     padding: 20px;
 }
 
@@ -115,12 +115,4 @@ h4 {
 .btn-secondary:hover {
     color: #FFFFFF;
     background-color: #641838;
-}
-
-.titles{
-    text-align: center;
-}
-
-.center{
-    text-align: center;
 }

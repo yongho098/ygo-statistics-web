@@ -25,11 +25,14 @@ def homepage(request):
 
 def decklist_detail(request, pk):
     # show ideal output of complete. take into account just made lists
+    # create new dictionary?-list of dictionary
     decklist = get_object_or_404(Decklist, pk=pk)
-    clean_decklist = []
-    for key in decklist.data:
-        clean_decklist.append(key)
-    return render(request, 'decklist/decklist_detail.html', {'decklist': decklist, 'clean': decklist.data})
+    clean_dict = []
+    for key, item in decklist.data.items():
+        template_dict = {'Name': key, 'Copies': item[0], 'Engine': item[1], 'Categorization': item[2]}
+        clean_dict.append(template_dict)
+
+    return render(request, 'decklist/decklist_detail.html', {'decklist': decklist, 'clean_dict': clean_dict})
 
 
 def register_page(request):
