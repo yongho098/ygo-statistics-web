@@ -1,0 +1,27 @@
+{% extends 'decklist/base.html' %}
+
+{% block content %}
+    <article class="decklist">    
+        <aside class="actions">
+            {% if user.is_authenticated %}
+            <a href="{% url 'combo_new' pk=pk %}" class="button2">New Combo</a>
+            <a href="{% url 'decklist_detail' pk=pk %}" class="button2">Return to Decklist</a>
+            {% endif %}
+        </aside> 
+        <table style="width:100%">
+        <tr>
+            <th>Combo Name</th>
+        </tr>
+        
+        {% for combo in combos %}
+        <tr>
+        <td><a href="{% url 'combo_edit' pk=combo.id %}">Edit</a></td>
+        <td><a href="{% url 'delete_combo' pk=combo.id %}">Delete</a></td>
+        {% for card in combo.combo.all %}
+        <td>{{ card }}</td>
+        {% endfor %}
+        </tr>
+        {% endfor %}
+        </table>
+    </article>
+{% endblock %}

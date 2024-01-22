@@ -1,0 +1,12 @@
+{% extends 'decklist/base.html' %}
+
+{% block content %}
+<h1>Delete Card</h1>
+<p>Are you sure you want to delete this card?</p>
+<li>{{ card.card_name }}</li>
+<br>
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+    </form>
+{% endblock %}

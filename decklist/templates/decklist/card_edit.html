@@ -1,0 +1,8 @@
+{% extends 'decklist/base.html' %}
+
+{% block content %}
+    <form method="POST" class="decklist-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-secondary">Save</button>
+    </form>
+{% endblock %}
