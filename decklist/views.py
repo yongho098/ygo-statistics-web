@@ -11,6 +11,10 @@ from django.http import HttpResponse
 
 # shows all decklists
 def post_decklist(request):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
+    
     # show decklists belonging to user
     decklists = Decklist.objects.filter(author = request.user)
     if len(decklists) > 0:
@@ -28,6 +32,10 @@ def homepage(request):
 
 #shows cards in decklist
 def decklist_detail(request, pk):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
+    
     # show ideal output of complete. take into account just made lists
     decklist = get_object_or_404(Decklist, pk=pk)
     cards = Cardlist.objects.filter(deck_list_id=pk)
@@ -71,6 +79,10 @@ def logout_user(request):
 
 #doesnt exist?
 def decklist_simulator(request):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
+    
     # maybe make function local to get card objects available?
     # create card item list while running sim
     # {'kashtira unicorn': [1, 'engine', 'starter']}
@@ -81,6 +93,10 @@ def decklist_simulator(request):
 
 # variables for running simulator
 def decklist_simulator_run(request,pk):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
+    
     # actually runinng the sim-get number of runs, handsize
     decklist = get_object_or_404(Decklist, pk=pk)
     
@@ -103,6 +119,10 @@ def decklist_simulator_run(request,pk):
 
 # shows results
 def decklist_simulator_results(request, pk):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
+    
     decklist = get_object_or_404(Decklist, pk=pk)
     # run create card here, run analysis func
     cards = Cardlist.objects.filter(deck_list_id=pk)
@@ -137,6 +157,10 @@ def decklist_simulator_results(request, pk):
 
 # creates a new decklist
 def decklist_new(request):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
+    
     # have a sample decklist option?-function
     if request.method == 'POST':
         # convert plaintext to dictionary, with default empty categories
@@ -166,6 +190,10 @@ def decklist_new(request):
 
 # give a sample decklist
 def decklist_sample(request):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
+    
     # issue by allowing users to create continuously
     if request.method == 'POST':
         # convert plaintext to dictionary, with default empty categories
@@ -192,6 +220,10 @@ def decklist_sample(request):
     
 # edit decklist setting (name)
 def decklist_edit(request, pk):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
+    
     # create object list and update
     decklist = get_object_or_404(Decklist, pk=pk)
     
@@ -215,6 +247,10 @@ def decklist_edit(request, pk):
 
 # edit cards in deck
 def card_edit(request, pk):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
+    
     cards = get_object_or_404(Cardlist, pk=pk)
     # checking if user is author
     if not request.user == cards.deck_list.author:
@@ -234,6 +270,10 @@ def card_edit(request, pk):
         return render(request, 'decklist/card_edit.html', {'form': form})
 
 def card_new(request, pk):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
+    
     decklist = get_object_or_404(Decklist, pk=pk)
     
     # checking if user is author
@@ -257,6 +297,10 @@ def card_new(request, pk):
 
 # create a new combo
 def combo_new(request,  pk):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
+    
     decklist = get_object_or_404(Decklist, pk=pk)
     # checking if user is author
     if not request.user == decklist.author:
@@ -288,6 +332,9 @@ def combo_new(request,  pk):
 
 # edit existing combos
 def combo_edit(request, pk):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
     
     combo = get_object_or_404(Combolist, pk=pk)
     # checking if user is author
@@ -317,6 +364,10 @@ def combo_edit(request, pk):
 
 # show all combos for current deck
 def combo_detail(request, pk):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
+    
     # show ideal output of complete. take into account just made lists
     decklist = get_object_or_404(Decklist, pk=pk)
     combos = Combolist.objects.filter(deck_list_id=pk)
@@ -331,6 +382,10 @@ def combo_detail(request, pk):
 
 # delete selected deck
 def delete_deck(request, pk):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
+    
     #need separate for deleting combos, deck?
     deck=get_object_or_404(Decklist, pk=pk)
     
@@ -349,6 +404,9 @@ def delete_deck(request, pk):
 
 # delete selected card and related combos
 def delete_card(request, pk):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
     
     card=get_object_or_404(Cardlist, pk=pk)
     combos = Combolist.objects.filter(deck_list_id=card.deck_list_id)
@@ -378,6 +436,10 @@ def delete_card(request, pk):
 
 # delete selected combo
 def delete_combo(request, pk):
+    # redirect to homepage if user is not logged in
+    if not request.user.is_authenticated:
+        return redirect('homepage')
+    
     combo = get_object_or_404(Combolist, pk=pk)
     
     # checking if user is author

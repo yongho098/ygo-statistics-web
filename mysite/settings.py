@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-r&2x-2*&h7rjxx*6qur&=q^6jt#n1x7b2ii^t!hqqyr7ev80=%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', 'yugioh-statistics.azurewebsites.net']
 
 
 # Application definition
@@ -48,6 +48,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -82,8 +83,13 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "django",
+        "USER": "Nammy",
+        "PASSWORD": "TestPassword123",
+        "HOST": "yugioh-statistics-db.postgres.database.azure.com",
+        "PORT": "5432",
+        "OPTIONS": {"sslmode": "require"}
     }
 }
 
@@ -123,9 +129,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / "staticfiles"
+#STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+
+CSRF_TRUSTED_ORIGINS = ['https://yugioh-statistics.azurewebsites.net']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
