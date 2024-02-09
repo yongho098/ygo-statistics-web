@@ -98,7 +98,7 @@ def deck_importer(decklist_input):
     # global card_object_list
     global deck_dictionary_whole, deck_dictionary_main
     deck_list = decklist_input.split("\r\n")
-    # print(deck_list)
+    #print(deck_list)
     parser(deck_list, 'whole')
     success = parser(deck_list, 'main')
     
@@ -111,9 +111,68 @@ def deck_importer(decklist_input):
         return converter(deck_dictionary_main)
     else:
         # tried to add invalid deck
-        print("Invalid Deck Format. Press Enter to continue")
+        # print("Invalid Deck Format. Press Enter to continue")
         return None
 
+def deck_importer_sample():
+    sample_list="""Monster
+3 Nibiru, the Primal Being
+1 Snake-Eyes Flamberge Dragon
+1 Sacred Fire King Garunix
+3 Fire King High Avatar Kirin
+1 Diabellstar the Black Witch
+1 Fire King Avatar Arvata
+1 Fire King Avatar Barong
+3 Ash Blossom & Joyous Spring
+3 Snake-Eye Ash
+2 Snake-Eyes Populus
+2 Legendary Fire King Ponix
+Spell
+3 Bonfire
+1 Original Sinful Spoils - Snake-Eye
+2 Pot of Prosperity
+1 Called by the Grave
+1 Circle of the Fire Kings
+1 Fire King Sky Burn
+1 Snake-Eye Dramatic Chase
+3 WANTED: Seeker of Sinful Spoils
+2 Fire King Sanctuary
+1 Fire King Island
+Trap
+3 Infinite Impermanence
+Extra
+1 Super Starslayer TY-PHON - Sky Crisis
+1 Garunix Eternity, Hyang of the Fire Kings
+1 Salamangreat Raging Phoenix
+1 Amphibious Swarmship Amblowhale
+1 Worldsea Dragon Zealantis
+1 Apollousa, Bow of the Goddess
+1 Promethean Princess, Bestower of Flames
+1 Decode Talker Heatsoul
+1 Selene, Queen of the Master Magicians
+1 Dharc the Dark Charmer, Gloomy
+1 Hiita the Fire Charmer, Ablaze
+1 Salamangreat Sunlight Wolf
+1 S:P Little Knight
+1 I:P Masquerena
+1 Linkuriboh
+"""
+    global deck_dictionary_whole, deck_dictionary_main
+    deck_list = sample_list.split("\n")
+    # print(deck_list)
+    success = parser(deck_list, 'main')
+    
+    if success == 1:
+        # valid decklist-create json
+        # print(deck_dictionary_whole)
+        json_object = json.dumps(deck_dictionary_main, sort_keys=True, indent=4)
+        # print(json_object)
+        
+        return converter(deck_dictionary_main)
+    else:
+        # tried to add invalid deck
+        # print("Invalid Deck Format. Press Enter to continue")
+        return None
 
 def combo_checker(combo_list, deck_data):
     if len(combo_list) == 1:
@@ -169,7 +228,7 @@ def simulation(card_list, runs, hand_size, combo):
                 'Hands with no Starters': 0,
                 'Hands with Garnets': 0,
                 'Average Starters in Hand': 0,
-                'Hands with a 2 Card Combo': 0,
+                'Hands with a Multiple Card Combo': 0,
                 '"Playable Hands"': 0,
                 '"Unplayable Hands"': 0,
                 'Average Hand Playability': '0%'}
@@ -191,7 +250,7 @@ def simulation(card_list, runs, hand_size, combo):
         if analysis_results[1] == 0:
             analysis_dict['Hands with no Starters'] += 1
         analysis_dict['Hands with Garnets'] += analysis_results[2]
-        analysis_dict['Hands with a 2 Card Combo'] += analysis_results[4]
+        analysis_dict['Hands with a Multiple Card Combo'] += analysis_results[4]
         if analysis_results[3] != 0:
             analysis_dict['"Playable Hands"'] += analysis_results[3]
         else:

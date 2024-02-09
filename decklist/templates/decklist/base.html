@@ -15,6 +15,9 @@
       type="text/css"
     />
     <link rel="stylesheet" href="{% static 'css/decklist.css' %}" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   </head>
   <body>
     <header class="page-header">
@@ -35,10 +38,25 @@
         
       </div>
     </header>
+    
+    {% if messages %}
+		<div class="messages">
+		{% for message in messages %}
+			<div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+				{{ message }}
+			</div>
+		{% endfor %}
+		</div>
+	{% endif %}
+
     <main class="container">
       <div class="row">
         <div class="col">{% block content %} {% endblock %}</div>
       </div>
+
+      {% block scripts %}
+
+      {% endblock %}
     </main>
   </body>
 </html>

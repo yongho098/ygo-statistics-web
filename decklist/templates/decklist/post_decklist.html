@@ -1,9 +1,17 @@
 {% extends 'decklist/base.html' %}
 
 {% block content %}
+<table style="width:100%">
+    <tr>
+        <th>Deck Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
 {% for decklist in decklists %}
-    <article class="decklist">
-        <h2><a href="{% url 'decklist_detail' pk=decklist.pk %}">{{ decklist.title }}</a></h2>        
-    </article>
+    <tr>
+        <td>{{ decklist.title }}</td>
+        <td><a href="{% url 'decklist_detail' pk=decklist.pk %}">Edit</a></td>
+        <td><a href="{% url 'delete_deck' pk=decklist.pk %}">Delete</a></td>
+    </tr>     
     {% endfor %}
 {% endblock %}
