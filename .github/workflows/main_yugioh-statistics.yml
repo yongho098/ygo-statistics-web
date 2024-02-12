@@ -10,6 +10,10 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  db_user: ${{ secrets.DB_USER }}
+  db_password: ${{ secrets.DB_PASSWORD }}
+
 
 jobs:
   build:
