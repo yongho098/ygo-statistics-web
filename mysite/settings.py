@@ -97,19 +97,6 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "django",
-#         "USER": "Nammy",
-#         "PASSWORD": "TestPassword123",
-#         "HOST": "yugioh-statistics-db.postgres.database.azure.com",
-#         "PORT": "5432",
-#         "OPTIONS": {"sslmode": "require"}
-#     }
-# }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
