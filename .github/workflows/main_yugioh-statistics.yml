@@ -13,7 +13,7 @@ on:
 env:
   db_user: ${{ secrets.DB_USER }}
   db_password: ${{ secrets.DB_PASSWORD }}
-  
+
 
 jobs:
   build:
