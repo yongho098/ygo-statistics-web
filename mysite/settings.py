@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+db_user = os.environ["db_user"]
+db_password = os.environ["db_password"]
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -85,13 +89,25 @@ DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "django",
-        "USER": "Nammy",
-        "PASSWORD": "TestPassword123",
+        "USER": db_user,
+        "PASSWORD": db_password,
         "HOST": "yugioh-statistics-db.postgres.database.azure.com",
         "PORT": "5432",
         "OPTIONS": {"sslmode": "require"}
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "django",
+#         "USER": "Nammy",
+#         "PASSWORD": "TestPassword123",
+#         "HOST": "yugioh-statistics-db.postgres.database.azure.com",
+#         "PORT": "5432",
+#         "OPTIONS": {"sslmode": "require"}
+#     }
+# }
 
 
 # Password validation
