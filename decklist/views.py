@@ -6,6 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import HttpResponse
+from django.conf import settings
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -14,7 +16,6 @@ def post_decklist(request):
     # redirect to homepage if user is not logged in
     if not request.user.is_authenticated:
         return redirect('homepage')
-    
     # show decklists belonging to user
     decklists = Decklist.objects.filter(author = request.user)
     if len(decklists) > 0:
@@ -45,49 +46,19 @@ def decklist_detail(request, pk):
         return response
     return render(request, 'decklist/decklist_detail.html', {'decklist': decklist, 'cards': cards})
 
+# def logout2(request):
+#     return redirect('homepage')
 
-def register_page(request):
-    form = UserCreationForm()
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
-            user = authenticate(username = username, password=password)
-            login(request, user)
-            messages.success(request, ("Registration succecssful"))
-            return redirect('post_decklist')
-        # else:
-        #     form = UserCreationForm()
-    return render(request, 'decklist/register.html', {'form': form})
-
-def login_user(request):
-    if request.method == 'POST':
-        request.POST.get('username')
-        request.POST.get('password')
-    else:
-        return render(request, 'decklist/login.html', {})
-
-def logout_user(request):
-    
-    if request.method == 'POST':
-        messages.success(request, ("You were logged out"))
-        logout(request)
-        return render(request, 'decklist/homepage.html')
-    return render(request, 'decklist/logout.html', {})
+def logout_microsoft(request):
+    #this should have a click to log out button for microsoft-go direct?
+    logout(request)
+    return render(request, 'decklist/logout_microsoft.html', {})
 
 #doesnt exist?
 def decklist_simulator(request):
     # redirect to homepage if user is not logged in
     if not request.user.is_authenticated:
         return redirect('homepage')
-    
-    # maybe make function local to get card objects available?
-    # create card item list while running sim
-    # {'kashtira unicorn': [1, 'engine', 'starter']}
-    # select decklist here, go to run page
-    # maybe just incorporate it into the detail page, add a button to run page
     decklists = Decklist.objects.order_by('title')
     return render(request, 'decklist/decklist_simulator.html', {'decklists': decklists})
 
@@ -149,7 +120,6 @@ def decklist_simulator_results(request, pk):
             temp_append.append(card.card_name)
         temp_combo.append(temp_append)
     # print(temp_combo)
-    
     
     # [analysis, output]
     output_dict = simulation(card_obj_list, decklist.runs, decklist.hand_size, temp_combo)

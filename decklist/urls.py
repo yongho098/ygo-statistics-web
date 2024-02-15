@@ -1,8 +1,10 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
+from django.conf import settings
 
 urlpatterns = [
+    settings.AUTH.urlpattern,
     path('', views.homepage, name='homepage'),
     path('decklist/', views.post_decklist, name='post_decklist'),
     path('decklist/<int:pk>/', views.decklist_detail, name='decklist_detail'),
@@ -19,8 +21,6 @@ urlpatterns = [
     path('decklist/<int:pk>/delete', views.delete_deck, name='delete_deck'),
     path('decklist/<int:pk>/card_edit/delete', views.delete_card, name='delete_card'),
     path('decklist/<int:pk>/combo/delete', views.delete_combo, name='delete_combo'),
-    path('register_user', views.register_page, name='register_page'),
-    path('login_user', auth_views.LoginView.as_view(template_name='decklist/login.html'), name='login_page'),
-    path('logout_user', views.logout_user, name='logout_page'),
-    # path('logout_user', auth_views.LogoutView.as_view(template_name='decklist/logout.html'), name='logout_page'),
+    path('logout_user', views.logout_microsoft, name='logout_page'),
+    #path('logout2', views.logout, name='logout2'),
 ]
