@@ -22,5 +22,4 @@ urlpatterns = [
     path('decklist/<int:pk>/card_edit/delete', views.delete_card, name='delete_card'),
     path('decklist/<int:pk>/combo/delete', views.delete_combo, name='delete_combo'),
     path('logout_user', views.logout_microsoft, name='logout_page'),
-    #path('logout2', views.logout, name='logout2'),
 ]

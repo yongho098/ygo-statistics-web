@@ -15,12 +15,21 @@ import os, random, string
 from dotenv import load_dotenv
 from identity.django import Auth
 load_dotenv()
+# AUTH = Auth(
+#     os.getenv('CLIENT_ID'),
+#     client_credential=os.getenv('CLIENT_SECRET'),
+#     redirect_uri=os.getenv('REDIRECT_URI'),
+#     scopes=os.getenv('SCOPE', "").split(),
+#     authority=os.getenv('AUTHORITY'),
+#     )
+
 AUTH = Auth(
-    os.getenv('CLIENT_ID'),
-    client_credential=os.getenv('CLIENT_SECRET'),
-    redirect_uri=os.getenv('REDIRECT_URI'),
-    scopes=os.getenv('SCOPE', "").split(),
-    authority=os.getenv('AUTHORITY'),
+    "24f6cfdc-3959-4544-b165-dc1e669f2d57",
+    client_credential="2-s8Q~I~llHPSQqCGF49CWfYkJmvfUmXmjP6hbYo",
+    redirect_uri="https://ygo-statistics.azurewebsites.net/getAToken",
+    #redirect_uri="http://localhost:5000/getAToken",
+    scopes="User.ReadBasic.All".split(),
+    authority="https://login.microsoftonline.com/common",
     )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,12 +40,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY", default="".join(random.choices(string.printable, k=64)))
+SECRET_KEY = "(*5o6ku3aod1qpeycxnb**p^j4=mw(=si@0dc3!2!*vc+pc-j6"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ygo-statistics.azurewebsites.net', 'localhost']
 
 
 # Application definition
@@ -50,7 +59,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "identity",  # To utilize the default templates came with the identity package
     'crispy_forms',
-    "azure_signin",
     'crispy_bootstrap5',
     'decklist',
 ]
@@ -62,6 +70,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -142,12 +151,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
+#STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+CSRF_TRUSTED_ORIGINS = ['https://ygo-statistics.azurewebsites.net']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'post_decklist'
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
+
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
