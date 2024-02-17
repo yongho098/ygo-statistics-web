@@ -15,6 +15,10 @@ import os, random, string
 from dotenv import load_dotenv
 from identity.django import Auth
 load_dotenv()
+
+db_user = os.environ["db_user"]
+db_password = os.environ["db_password"]
+
 # AUTH = Auth(
 #     os.getenv('CLIENT_ID'),
 #     client_credential=os.getenv('CLIENT_SECRET'),
@@ -122,8 +126,8 @@ DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "django",
-        "USER": "Nammy",
-        "PASSWORD": "TestPassword321",
+        "USER": db_user,
+        "PASSWORD": db_password,
         "HOST": "ygo-statistics-db.postgres.database.azure.com",
         "PORT": "5432",
         "OPTIONS":{"sslmode": "require"},
