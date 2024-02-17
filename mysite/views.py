@@ -6,6 +6,7 @@ from django.shortcuts import redirect, render
 import requests
 from django.contrib.auth.models import User
 from django.contrib.auth import login
+from django.http import HttpRequest
 
 
 __version__ = "0.2.0"

@@ -22,6 +22,8 @@ load_dotenv()
 #     scopes=os.getenv('SCOPE', "").split(),
 #     authority=os.getenv('AUTHORITY'),
 #     )
+# user: Nammy
+# pass: TestPassword321
 
 AUTH = Auth(
     "24f6cfdc-3959-4544-b165-dc1e669f2d57",
@@ -51,6 +53,7 @@ ALLOWED_HOSTS = ['ygo-statistics.azurewebsites.net', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    #"whitenoise.runserver_nostatic",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -108,10 +111,22 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "django",
+        "USER": "Nammy",
+        "PASSWORD": "TestPassword321",
+        "HOST": "ygo-statistics-db.postgres.database.azure.com",
+        "PORT": "5432",
+        "OPTIONS":{"sslmode": "require"},
     }
 }
 
