@@ -1,4 +1,0 @@
-{
-    "appService.defaultWebAppToDeploy": "/subscriptions/d14c6901-7a91-492e-804d-7164cdbb1cd2/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/ygo-hand-analysis",
-    "appService.deploySubpath": "."
-}
