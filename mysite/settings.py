@@ -19,20 +19,12 @@ load_dotenv()
 db_user = os.environ["db_user"]
 db_password = os.environ["db_password"]
 secret_key = os.environ["secret_key"]
-
-# AUTH = Auth(
-#     os.getenv('CLIENT_ID'),
-#     client_credential=os.getenv('CLIENT_SECRET'),
-#     redirect_uri=os.getenv('REDIRECT_URI'),
-#     scopes=os.getenv('SCOPE', "").split(),
-#     authority=os.getenv('AUTHORITY'),
-#     )
-# user: Nammy
-# pass: TestPassword321
+client_id = os.environ["client_id"]
+client_creden = os.environ["client_credential"]
 
 AUTH = Auth(
-    "24f6cfdc-3959-4544-b165-dc1e669f2d57",
-    client_credential="2-s8Q~I~llHPSQqCGF49CWfYkJmvfUmXmjP6hbYo",
+    client_id,
+    client_credential=client_creden,
     redirect_uri="https://ygo-statistics.azurewebsites.net/getAToken",
     scopes="User.ReadBasic.All".split(),
     authority="https://login.microsoftonline.com/common",
@@ -47,7 +39,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = secret_key
-# SECRET_KEY = "(*5o6ku3aod1qpeycxnb**p^j4=mw(=si@0dc3!2!*vc+pc-j6"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
