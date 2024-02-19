@@ -16,7 +16,6 @@ def parser(decklist, mode):
             if decklist[i][0].isnumeric():
                 local_dict_whole[decklist[i][2:]] = int(decklist[i][0])
         # check if valid
-        #print(local_dict_whole)
         if local_dict_whole != {}:
             deck_dictionary_whole.clear()
             deck_dictionary_whole = local_dict_whole.copy()
@@ -104,14 +103,11 @@ def deck_importer(decklist_input):
     
     if success == 1:
         # valid decklist-create json
-        # print(deck_dictionary_whole)
         json_object = json.dumps(deck_dictionary_main, sort_keys=True, indent=4)
-        # print(json_object)
         
         return converter(deck_dictionary_main)
     else:
         # tried to add invalid deck
-        # print("Invalid Deck Format. Press Enter to continue")
         return None
 
 def deck_importer_sample():
@@ -164,14 +160,10 @@ Extra
     
     if success == 1:
         # valid decklist-create json
-        # print(deck_dictionary_whole)
-        json_object = json.dumps(deck_dictionary_main, sort_keys=True, indent=4)
-        # print(json_object)
-        
+        json_object = json.dumps(deck_dictionary_main, sort_keys=True, indent=4)        
         return converter(deck_dictionary_main)
     else:
         # tried to add invalid deck
-        # print("Invalid Deck Format. Press Enter to continue")
         return None
 
 def combo_checker(combo_list, deck_data):
@@ -257,53 +249,12 @@ def simulation(card_list, runs, hand_size, combo):
             analysis_dict['"Unplayable Hands"'] += 1
         playable_percent = analysis_dict['"Playable Hands"']/runs
         analysis_dict['Average Hand Playability'] = f'{playable_percent * 100}%'
-        # print(local_result)
         results.append(local_result)
         # local results, add to global after printing
     
     analysis_dict['Average Starters in Hand'] = total_starter/runs
-    # print(analysis_dict)
     return (analysis_dict, results)
 
-    # have analysis in here
-    # what to evaluate
-
-    # analysis here?
-    # export_option = input("Enter Option, Press Enter to Return: ")
-    # if export_option == '1':
-    #     # Just data
-    #     export_name = input('Enter Export File Name: ')
-    #     with open(f"results/{export_name}.csv", 'w') as file:
-    #         for line in results:
-    #             writer = csv.writer(file, lineterminator="\n")
-    #             writer.writerow(sorted(line))
-    #         writer.writerow(['Total Runs', runs])
-    #     input("Exported Results to results Folder. Press Enter to continue.")
-    # elif export_option == '2':
-    #     # Just analysis
-    #     export_name = input('Enter Export File Name: ')
-    #     with open(f"results/{export_name}.csv", 'w') as file:
-    #         for key, value in analysis_dict.items():
-    #             out = [key, value]
-    #             writer = csv.writer(file, lineterminator="\n")
-    #             writer.writerow(out)
-    #         writer.writerow(['Total Runs', runs])
-    #     input("Exported Results to results Folder. Press Enter to continue.")
-    # elif export_option == '3':
-    #     # Both-most common
-    #     export_name = input('Enter Export File Name: ')
-    #     with open(f"results/{export_name}.csv", 'w') as file:
-    #         for line in results:
-    #             writer = csv.writer(file, lineterminator="\n")
-    #             writer.writerow(sorted(line))
-    #         writer.writerow('\n')
-    #         for key, value in analysis_dict.items():
-    #             out = [key, value]
-    #             writer.writerow(out)
-    #         writer.writerow(['Total Runs', runs])
-    #     input("Exported Results to results Folder. Press Enter to continue.")
-    # elif export_option == '4':
-    #     simulation(card_list, runs, hand_size, combo)
 
 testlist = """Monster
 3 Sunseed Genius Loci
@@ -361,10 +312,7 @@ testcombo = []
 testoutput = """
 {'Sunseed Genius Loci': 3, 'Therion "King" Regulus': 1, 'Therion "Lily" Borea': 1, 'Snowdrop the Rikka Fairy': 1, 'Mudan the Rikka Fairy': 2, 'Primula the Rikka Fairy': 1, 'Rikka Princess': 3, 'Lonefire Blossom': 1, 'Ash Blossom & Joyous Spring': 2, 'Sunseed Twin': 1, 'Droll & Lock Bird': 2, 'Rikka Petal': 2, 'Dark Ruler No More': 2, 
 'One for One': 1, 'Rikka Glamour': 3, 'Sunvine Sowing': 2, 'Triple Tactics Talent': 2, 'Unexpected Dai': 3, 'Called by the Grave': 1, 'Crossout Designator': 3, 'Rikka Konkon': 2, 'Therion Discolosseum': 1, 'Infinite Impermanence': 2, 'Rikka Sheet': 1}"""
-# print(testlist.split("\n"))
-# testout = deck_importer(testlist)
-#print(testout)
-# print(converter(testout))
+
 
 testout2 = {
     "Kashtira Unicorn": [
@@ -449,8 +397,3 @@ testout2 = {
     ]
   }
 
-
-# testin2 = {['asdf', 'fda'], ['ff', 'cv']}
-# testout3 = json.loads(testin2)
-#outs = create_card(testout2)
-#print(simulation(outs, 5, 5, []))

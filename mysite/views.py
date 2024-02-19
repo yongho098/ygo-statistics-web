@@ -28,13 +28,7 @@ def index(request):
         login(request, django_user)
     
     return redirect('post_decklist')
-        
-    return render(request, 'index.html', dict(
-        user=user,
-        version=__version__,
-        edit_profile_url=settings.AUTH.get_edit_profile_url(request),
-        downstream_api=os.getenv("ENDPOINT"),
-    ))
+
 
 # Instead of using the login_required decorator,
 # here we demonstrate how to handle the error explicitly.

@@ -32,8 +32,6 @@ class Decklist(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     deck_plaintext = models.TextField()
-    # deck_combo = models.JSONField(default=[[]])
-    # data = models.JSONField(default=dict)
     runs = models.PositiveSmallIntegerField(default=100)
     hand_size = models.PositiveSmallIntegerField(default=5)
     

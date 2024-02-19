@@ -46,9 +46,6 @@ def decklist_detail(request, pk):
         return response
     return render(request, 'decklist/decklist_detail.html', {'decklist': decklist, 'cards': cards})
 
-# def logout2(request):
-#     return redirect('homepage')
-
 def logout_microsoft(request):
     #this should have a click to log out button for microsoft-go direct?
     logout(request)
@@ -119,7 +116,6 @@ def decklist_simulator_results(request, pk):
         for card in combo.combo.all():
             temp_append.append(card.card_name)
         temp_combo.append(temp_append)
-    # print(temp_combo)
     
     # [analysis, output]
     output_dict = simulation(card_obj_list, decklist.runs, decklist.hand_size, temp_combo)
@@ -283,7 +279,6 @@ def combo_new(request,  pk):
         form = ComboCreateForm(request.POST, pid=pk)
         if form.is_valid():
             picked=form.cleaned_data
-            # print(picked['combo'].all().count())
             # checking wheter theres at least 2 cards - add a maximum check?
             if picked['combo'].all().count() <= 1:
                 messages.error(request, 'Please select at least 2 cards.')
@@ -317,7 +312,6 @@ def combo_edit(request, pk):
         form = ComboEditForm(request.POST, instance=combo, pid=combo.deck_list_id)
         if form.is_valid():
             picked=form.cleaned_data
-            # print(picked['combo'].all().count())
             # checking wheter theres at least 2 cards - add a maximum check?
             if picked['combo'].all().count() <= 1:
                 messages.error(request, 'Please select at least 2 cards.')
@@ -381,7 +375,6 @@ def delete_card(request, pk):
     card=get_object_or_404(Cardlist, pk=pk)
     combos = Combolist.objects.filter(deck_list_id=card.deck_list_id)
     combos_to_delete=[]
-    #print(combos_to_delete)
     
     # checking if user is author
     if not request.user == card.deck_list.author:
